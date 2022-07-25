@@ -46,7 +46,7 @@
                 </div>
             </div>
 
-            <div class="navbar-end">
+            <div v-if="!user.loggedUser.username" class="navbar-end">
                 <div class="navbar-item">
                     <div class="buttons">
                         <NuxtLink to="login" class="button is-primary">
@@ -58,14 +58,44 @@
                     </div>
                 </div>
             </div>
+            <div v-else class="navbar-end">
+                <div class="navbar-item has-dropdown is-hoverable">
+                    <a class="navbar-link">
+                        <strong class="navbar-username">{{user.loggedUser.username}}</strong>
+                        <figure class="image is-48x48 ">
+                            <img v-if="user.loggedUser.profilePic" src="" alt="" class="is-rounded">
+                            <div v-else class="default-profile has-background-primary"></div>
+                        </figure>
+                    </a>
+
+                    <div class="navbar-dropdown">
+                        <a class="navbar-item">
+                            About
+                        </a>
+                        <a class="navbar-item">
+                            Jobs
+                        </a>
+                        <a class="navbar-item">
+                            Contact
+                        </a>
+                        <hr class="navbar-divider">
+                        <a class="navbar-item">
+                            Report an issue
+                        </a>
+                    </div>
+                </div>
+            </div>
         </div>
     </nav>
 </template>
 
 
 <script setup>
-
+import { useUserStore } from '~/store/user'
 import { ref } from 'vue'
+
+const user = useUserStore();
+
 
 const menu = ref(false);
 

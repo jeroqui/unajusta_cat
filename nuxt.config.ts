@@ -1,27 +1,30 @@
 import { defineNuxtConfig } from 'nuxt'
-import '@nuxt3/apollo-module'
+import { InMemoryCache } from '@apollo/client/core'
 
 // https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
     serverMiddleware: [
         // Will register file from project server-middleware directory to handle /server-api/* requests
-        { path: "/server-api", handler: "~/api-backend/index.ts" },
+        { path: "/api", handler: "~/api-backend/index.ts" },
     ],
     css: [
         // Load a Node.js module directly (here it's a Sass file)
         'bulma',
+        'assets/css/main.scss'
     ],
     buildModules: [
-        '@nuxt3/apollo-module'
+        '@nuxt3/apollo-module',
     ],
     modules: [
+        '@pinia/nuxt'
         // '@nuxtjs/apollo',
         //   '@nuxtjs/i18n',
     ],
     apollo: {
         clientConfigs: {
             default: {
-                httpEndpoint: 'api-backend/graphql',
+                uri: 'api/graphql',
+                // cache: new InMemoryCache()
             },
         },
     },

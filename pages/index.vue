@@ -1,5 +1,5 @@
 <template>
-    <section class="hero is-primary">
+    <section id="header-hero" class="hero is-primary">
         <div class="hero-body">
             <p class="title">
             unajusta.cat
@@ -9,4 +9,17 @@
             </p>
         </div>
     </section>
+    <section class="section">
+        <div class="container">
+            {{result}}
+        </div>
+    </section>
 </template>
+
+
+<script setup>
+import { useGetAllUsersQuery } from '~~/composables/api';
+
+const {result, loading} = await useGetAllUsersQuery();
+
+</script>

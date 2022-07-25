@@ -2,16 +2,16 @@
     <section class="section">
 
         <div class="container">
-            <form class="box" v-on:submit="login">
+            <form class="box" v-on:submit.prevent="login({username, password})">
                 <div class="field">
-                    <label class="label">Email</label>
+                    <label class="label">Usuari</label>
                     <div class="control">
                         <input v-model="username" class="input" type="text" placeholder="usuari">
                     </div>
                 </div>
 
                 <div class="field">
-                    <label class="label">Password</label>
+                    <label class="label">Contrasenya</label>
                     <div class="control">
                         <input v-model="password" class="input" type="password" placeholder="********">
                     </div>
@@ -24,25 +24,22 @@
 </template>
 
 <script setup>
-import gql from 'graphql-tag'
-
+import { useUserStore } from '~/store/user'
+import { useLoginUserMutation } from '~~/composables/api';
+const user = useUserStore();
 
 const username = ref("");
 const password = ref("");
 
 
-const SINGLE_CHARACTER_QUERY = gql`
-    mutation Mutation($username: String!, $password: String!) {
-        loginUser(username: $username, password: $password) {
-            id
-            username
-        }
-    }
-`
+const { mutate: login, onDone, onError } = useLoginUserMutation();
 
-function login() {
-    return false;
-}
+onDone((res) => {
+    user.logIn(res.data)
+})
 
+onError((res) => {
+    console.log(res);
+})
 
 </script>
