@@ -1,0 +1,18 @@
+mutation LoginUser($username: String!, $password: String!) {
+    loginUser(username: $username, password: $password) {
+        id
+        username
+    }
+}
+
+
+mutation LogoutUser {
+    logoutUser
+}
+
+mutation RegisterUser($username: String!, $email: String!, $password: String!, $nom: String!, $cognoms: String) {
+    registerUser(username: $username, email: $email, password: $password, nom: $nom, cognoms: $cognoms) {
+        id
+        username
+    }
+}

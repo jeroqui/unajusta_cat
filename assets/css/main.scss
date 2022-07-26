@@ -12,8 +12,13 @@
 
 #header-hero {
     background-image: url('img/voleyBall.png');
-    background-size: 20vw;
+    background-size: 400pt;
     background-position-x: right;
     background-position-y: bottom;
     background-repeat: no-repeat;
+}
+
+.narrow-box {
+    margin: 0 auto;
+    max-width: 500pt;
 }

@@ -49,7 +49,7 @@
             <div v-if="!user.loggedUser.username" class="navbar-end">
                 <div class="navbar-item">
                     <div class="buttons">
-                        <NuxtLink to="login" class="button is-primary">
+                        <NuxtLink to="signup" class="button is-primary">
                             <strong>Sign up</strong>
                         </NuxtLink>
                         <NuxtLink to="login" class="button is-light">
@@ -70,17 +70,12 @@
 
                     <div class="navbar-dropdown">
                         <a class="navbar-item">
-                            About
+                            Profile
                         </a>
-                        <a class="navbar-item">
-                            Jobs
-                        </a>
-                        <a class="navbar-item">
-                            Contact
-                        </a>
+
                         <hr class="navbar-divider">
-                        <a class="navbar-item">
-                            Report an issue
+                        <a @click="logout" class="navbar-item">
+                            Logout
                         </a>
                     </div>
                 </div>
@@ -94,9 +89,26 @@
 import { useUserStore } from '~/store/user'
 import { ref } from 'vue'
 
+import { useLogoutUserMutation } from '~~/composables/api';
+
 const user = useUserStore();
 
 
 const menu = ref(false);
+
+
+
+
+const { mutate: logout, onDone, onError } = useLogoutUserMutation();
+
+onDone((res) => {
+    if (res.data.logoutUser) {
+        user.$reset();
+    }
+})
+
+onError((res) => {
+    console.log(res);
+})
 
 </script>

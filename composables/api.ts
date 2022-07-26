@@ -14,6 +14,16 @@ export function useLoginUserMutation() {
 }
 
 
+export const LogoutUserMutation = gql`
+    mutation Mutation {
+        logoutUser
+    }`
+
+export function useLogoutUserMutation() {
+  return VueApolloComposable.useMutation<any, any>(LogoutUserMutation)
+}
+
+
 export const getAllUsersQuery = gql`
     query Test {
         users {

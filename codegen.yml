@@ -1,0 +1,14 @@
+overwrite: true
+schema: api-backend/graphql/schema.graphql
+documents: api-backend/graphql/**/*.graphql
+generates:
+  generated/schema.d.ts:
+    plugins:
+      - typescript
+  generated/operations.ts:
+    config:
+      documentMode: documentNode
+    plugins:
+      - typescript
+      - typescript-operations
+      - typescript-vue-apollo

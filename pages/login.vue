@@ -1,8 +1,7 @@
 <template>
     <section class="section">
-
         <div class="container">
-            <form class="box" v-on:submit.prevent="login({username, password})">
+            <form class="box narrow-box" v-on:submit.prevent="login({username, password})">
                 <div class="field">
                     <label class="label">Usuari</label>
                     <div class="control">
@@ -17,7 +16,9 @@
                     </div>
                 </div>
 
-                <button class="button is-primary">Sign in</button>
+                <button class="button is-primary block">Log in</button>
+
+                <p v-if="error" class="block notification is-danger">{{error}}</p>
             </form>
         </div>
     </section>
@@ -25,21 +26,33 @@
 
 <script setup>
 import { useUserStore } from '~/store/user'
-import { useLoginUserMutation } from '~~/composables/api';
+import { useLoginUserMutation } from '@/generated/operations';
 const user = useUserStore();
+
 
 const username = ref("");
 const password = ref("");
 
+const route = useRoute();
 
-const { mutate: login, onDone, onError } = useLoginUserMutation();
+async function redirect() {
+    if (route.params.next) {
+        return await navigateTo(route.params.next);
+    }
+
+    return await navigateTo('/')
+}
+
+const { mutate: login, onDone, onError, error } = useLoginUserMutation();
 
 onDone((res) => {
     user.logIn(res.data)
+    redirect()
 })
 
-onError((res) => {
-    console.log(res);
+
+onError(() => {
+    console.log(error);
 })
 
 </script>

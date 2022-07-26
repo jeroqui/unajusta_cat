@@ -33,6 +33,14 @@ export const register = mutationField('registerUser', {
 });
 
 
+class AuthenticationError extends Error {
+    constructor() {
+      super("username or password don't match to a registered user");
+      this.name = 'Authentication';
+    }
+  }
+
+
 export const loginUser = mutationField('loginUser', {
     type: User,
     args: {
@@ -42,12 +50,12 @@ export const loginUser = mutationField('loginUser', {
     resolve: async (root, args, ctx) => {
         const user = await ctx.prisma.user.findUnique({ where: { username: args.username } });
         if (!user) {
-            return null;
+            throw new AuthenticationError();
         }
 
         const valid = await bcrypt.compare(args.password, user.password);
         if (!valid) {
-            return null;
+            throw new AuthenticationError();
         }
 
         const { accessToken, refreshToken } = createTokens(user);
@@ -57,5 +65,30 @@ export const loginUser = mutationField('loginUser', {
         (ctx.request as any).userId = user.id;
 
         return user;
+    }
+})
+
+
+
+export const logoutUser = mutationField('logoutUser', {
+    type: "Boolean",
+    resolve: async (root, args, ctx) => {
+        if (!(ctx.request as any).userId) {
+            return false;
+        }
+
+        const user = await ctx.prisma.user.update({
+            where: { id: (ctx.request as any).userId },
+            data: {
+                tokenCount: {
+                    increment: 1
+                }
+            }
+        });
+
+        ctx.response.clearCookie('acces-token');
+        ctx.response.clearCookie('refresh-token');
+
+        return true;
     }
 })

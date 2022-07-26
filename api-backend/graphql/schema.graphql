@@ -4,6 +4,7 @@
 
 type Mutation {
   loginUser(password: String!, username: String!): User
+  logoutUser: Boolean
   registerUser(cognoms: String, email: String!, nom: String!, password: String!, username: String!): User
 }
 

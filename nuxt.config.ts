@@ -1,5 +1,6 @@
 import { defineNuxtConfig } from 'nuxt'
-import { InMemoryCache } from '@apollo/client/core'
+import '@nuxt3/graphql-codegen-module'
+// import { InMemoryCache } from '@apollo/client/core'
 
 // https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
@@ -14,6 +15,7 @@ export default defineNuxtConfig({
     ],
     buildModules: [
         '@nuxt3/apollo-module',
+        '@nuxt3/graphql-codegen-module'
     ],
     modules: [
         '@pinia/nuxt'
@@ -28,6 +30,9 @@ export default defineNuxtConfig({
             },
         },
     },
+    graphqlCodegen: {
+        schema: 'http://localhost:3000/api/graphql'
+    }
     // i18n: {
     //     locales: [
     //         {
