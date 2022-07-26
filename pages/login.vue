@@ -46,7 +46,7 @@ async function redirect() {
 const { mutate: login, onDone, onError, error } = useLoginUserMutation();
 
 onDone((res) => {
-    user.logIn(res.data)
+    user.logIn({username: res.data.loginUser.username})
     redirect()
 })
 

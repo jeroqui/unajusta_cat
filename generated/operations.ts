@@ -58,16 +58,6 @@ export type User = {
   username?: Maybe<Scalars['String']>;
 };
 
-export type GetUsersQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type GetUsersQuery = { __typename?: 'Query', users?: Array<{ __typename: 'User', id?: number | null, username?: string | null }> | null };
-
-export type GetLoggedUserQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type GetLoggedUserQuery = { __typename?: 'Query', loggedUser?: { __typename?: 'User', id?: number | null, username?: string | null } | null };
-
 export type LoginUserMutationVariables = Exact<{
   username: Scalars['String'];
   password: Scalars['String'];
@@ -92,49 +82,17 @@ export type RegisterUserMutationVariables = Exact<{
 
 export type RegisterUserMutation = { __typename?: 'Mutation', registerUser?: { __typename?: 'User', id?: number | null, username?: string | null } | null };
 
+export type GetUsersQueryVariables = Exact<{ [key: string]: never; }>;
 
-export const GetUsersDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetUsers"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"users"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"username"}}]}}]}}]} as unknown as DocumentNode;
 
-/**
- * __useGetUsersQuery__
- *
- * To run a query within a Vue component, call `useGetUsersQuery` and pass it any options that fit your needs.
- * When your component renders, `useGetUsersQuery` returns an object from Apollo Client that contains result, loading and error properties
- * you can use to render your UI.
- *
- * @param options that will be passed into the query, supported options are listed on: https://v4.apollo.vuejs.org/guide-composable/query.html#options;
- *
- * @example
- * const { result, loading, error } = useGetUsersQuery();
- */
-export function useGetUsersQuery(options: VueApolloComposable.UseQueryOptions<GetUsersQuery, GetUsersQueryVariables> | VueCompositionApi.Ref<VueApolloComposable.UseQueryOptions<GetUsersQuery, GetUsersQueryVariables>> | ReactiveFunction<VueApolloComposable.UseQueryOptions<GetUsersQuery, GetUsersQueryVariables>> = {}) {
-  return VueApolloComposable.useQuery<GetUsersQuery, GetUsersQueryVariables>(GetUsersDocument, {}, options);
-}
-export function useGetUsersLazyQuery(options: VueApolloComposable.UseQueryOptions<GetUsersQuery, GetUsersQueryVariables> | VueCompositionApi.Ref<VueApolloComposable.UseQueryOptions<GetUsersQuery, GetUsersQueryVariables>> | ReactiveFunction<VueApolloComposable.UseQueryOptions<GetUsersQuery, GetUsersQueryVariables>> = {}) {
-  return VueApolloComposable.useLazyQuery<GetUsersQuery, GetUsersQueryVariables>(GetUsersDocument, {}, options);
-}
-export type GetUsersQueryCompositionFunctionResult = VueApolloComposable.UseQueryReturn<GetUsersQuery, GetUsersQueryVariables>;
-export const GetLoggedUserDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetLoggedUser"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"loggedUser"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"username"}}]}}]}}]} as unknown as DocumentNode;
+export type GetUsersQuery = { __typename?: 'Query', users?: Array<{ __typename: 'User', id?: number | null, username?: string | null }> | null };
 
-/**
- * __useGetLoggedUserQuery__
- *
- * To run a query within a Vue component, call `useGetLoggedUserQuery` and pass it any options that fit your needs.
- * When your component renders, `useGetLoggedUserQuery` returns an object from Apollo Client that contains result, loading and error properties
- * you can use to render your UI.
- *
- * @param options that will be passed into the query, supported options are listed on: https://v4.apollo.vuejs.org/guide-composable/query.html#options;
- *
- * @example
- * const { result, loading, error } = useGetLoggedUserQuery();
- */
-export function useGetLoggedUserQuery(options: VueApolloComposable.UseQueryOptions<GetLoggedUserQuery, GetLoggedUserQueryVariables> | VueCompositionApi.Ref<VueApolloComposable.UseQueryOptions<GetLoggedUserQuery, GetLoggedUserQueryVariables>> | ReactiveFunction<VueApolloComposable.UseQueryOptions<GetLoggedUserQuery, GetLoggedUserQueryVariables>> = {}) {
-  return VueApolloComposable.useQuery<GetLoggedUserQuery, GetLoggedUserQueryVariables>(GetLoggedUserDocument, {}, options);
-}
-export function useGetLoggedUserLazyQuery(options: VueApolloComposable.UseQueryOptions<GetLoggedUserQuery, GetLoggedUserQueryVariables> | VueCompositionApi.Ref<VueApolloComposable.UseQueryOptions<GetLoggedUserQuery, GetLoggedUserQueryVariables>> | ReactiveFunction<VueApolloComposable.UseQueryOptions<GetLoggedUserQuery, GetLoggedUserQueryVariables>> = {}) {
-  return VueApolloComposable.useLazyQuery<GetLoggedUserQuery, GetLoggedUserQueryVariables>(GetLoggedUserDocument, {}, options);
-}
-export type GetLoggedUserQueryCompositionFunctionResult = VueApolloComposable.UseQueryReturn<GetLoggedUserQuery, GetLoggedUserQueryVariables>;
+export type GetLoggedUserQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetLoggedUserQuery = { __typename?: 'Query', loggedUser?: { __typename?: 'User', id?: number | null, username?: string | null } | null };
+
+
 export const LoginUserDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"LoginUser"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"username"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"password"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"loginUser"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"username"},"value":{"kind":"Variable","name":{"kind":"Name","value":"username"}}},{"kind":"Argument","name":{"kind":"Name","value":"password"},"value":{"kind":"Variable","name":{"kind":"Name","value":"password"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"username"}}]}}]}}]} as unknown as DocumentNode;
 
 /**
@@ -205,3 +163,45 @@ export function useRegisterUserMutation(options: VueApolloComposable.UseMutation
   return VueApolloComposable.useMutation<RegisterUserMutation, RegisterUserMutationVariables>(RegisterUserDocument, options);
 }
 export type RegisterUserMutationCompositionFunctionResult = VueApolloComposable.UseMutationReturn<RegisterUserMutation, RegisterUserMutationVariables>;
+export const GetUsersDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetUsers"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"users"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"__typename"}},{"kind":"Field","name":{"kind":"Name","value":"username"}}]}}]}}]} as unknown as DocumentNode;
+
+/**
+ * __useGetUsersQuery__
+ *
+ * To run a query within a Vue component, call `useGetUsersQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetUsersQuery` returns an object from Apollo Client that contains result, loading and error properties
+ * you can use to render your UI.
+ *
+ * @param options that will be passed into the query, supported options are listed on: https://v4.apollo.vuejs.org/guide-composable/query.html#options;
+ *
+ * @example
+ * const { result, loading, error } = useGetUsersQuery();
+ */
+export function useGetUsersQuery(options: VueApolloComposable.UseQueryOptions<GetUsersQuery, GetUsersQueryVariables> | VueCompositionApi.Ref<VueApolloComposable.UseQueryOptions<GetUsersQuery, GetUsersQueryVariables>> | ReactiveFunction<VueApolloComposable.UseQueryOptions<GetUsersQuery, GetUsersQueryVariables>> = {}) {
+  return VueApolloComposable.useQuery<GetUsersQuery, GetUsersQueryVariables>(GetUsersDocument, {}, options);
+}
+export function useGetUsersLazyQuery(options: VueApolloComposable.UseQueryOptions<GetUsersQuery, GetUsersQueryVariables> | VueCompositionApi.Ref<VueApolloComposable.UseQueryOptions<GetUsersQuery, GetUsersQueryVariables>> | ReactiveFunction<VueApolloComposable.UseQueryOptions<GetUsersQuery, GetUsersQueryVariables>> = {}) {
+  return VueApolloComposable.useLazyQuery<GetUsersQuery, GetUsersQueryVariables>(GetUsersDocument, {}, options);
+}
+export type GetUsersQueryCompositionFunctionResult = VueApolloComposable.UseQueryReturn<GetUsersQuery, GetUsersQueryVariables>;
+export const GetLoggedUserDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetLoggedUser"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"loggedUser"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"username"}}]}}]}}]} as unknown as DocumentNode;
+
+/**
+ * __useGetLoggedUserQuery__
+ *
+ * To run a query within a Vue component, call `useGetLoggedUserQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetLoggedUserQuery` returns an object from Apollo Client that contains result, loading and error properties
+ * you can use to render your UI.
+ *
+ * @param options that will be passed into the query, supported options are listed on: https://v4.apollo.vuejs.org/guide-composable/query.html#options;
+ *
+ * @example
+ * const { result, loading, error } = useGetLoggedUserQuery();
+ */
+export function useGetLoggedUserQuery(options: VueApolloComposable.UseQueryOptions<GetLoggedUserQuery, GetLoggedUserQueryVariables> | VueCompositionApi.Ref<VueApolloComposable.UseQueryOptions<GetLoggedUserQuery, GetLoggedUserQueryVariables>> | ReactiveFunction<VueApolloComposable.UseQueryOptions<GetLoggedUserQuery, GetLoggedUserQueryVariables>> = {}) {
+  return VueApolloComposable.useQuery<GetLoggedUserQuery, GetLoggedUserQueryVariables>(GetLoggedUserDocument, {}, options);
+}
+export function useGetLoggedUserLazyQuery(options: VueApolloComposable.UseQueryOptions<GetLoggedUserQuery, GetLoggedUserQueryVariables> | VueCompositionApi.Ref<VueApolloComposable.UseQueryOptions<GetLoggedUserQuery, GetLoggedUserQueryVariables>> | ReactiveFunction<VueApolloComposable.UseQueryOptions<GetLoggedUserQuery, GetLoggedUserQueryVariables>> = {}) {
+  return VueApolloComposable.useLazyQuery<GetLoggedUserQuery, GetLoggedUserQueryVariables>(GetLoggedUserDocument, {}, options);
+}
+export type GetLoggedUserQueryCompositionFunctionResult = VueApolloComposable.UseQueryReturn<GetLoggedUserQuery, GetLoggedUserQueryVariables>;

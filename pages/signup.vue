@@ -80,7 +80,7 @@ async function redirect() {
 
 onDone(async (res) => {
     login({username: res.data.registerUser.username, password: password.value});
-    user.logIn(res.data);
+    user.logIn({username: res.data.registerUser.username});
     redirect();
 })
 

@@ -11,7 +11,7 @@ export const user = queryField('user', {
     resolve: async (root, args, ctx) => {
         return ctx.prisma.user.findUnique({where: {id: args.userId}});
     }
-})
+});
 
 
 export const loggedUser = queryField('loggedUser', {

@@ -5,11 +5,12 @@ export const useUserStore = defineStore({
   state: () => ({
     loggedUser: {
       username: ""
-    }
+    },
+    loaded: false
   }),
   actions: {
-    logIn(userResponse) {
-      this.loggedUser.username = userResponse.loginUser.username;
+    logIn({username}) {
+      this.loggedUser.username = username;
     }
   },
   getters: {},

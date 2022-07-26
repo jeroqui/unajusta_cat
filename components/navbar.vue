@@ -67,19 +67,28 @@
 import { useUserStore } from '~/store/user'
 import { ref } from 'vue'
 
-import { useLogoutUserMutation } from '@/generated/operations';
+import { useGetLoggedUserQuery, useLogoutUserMutation } from '@/generated/operations';
 
 const user = useUserStore();
 
 
 const menu = ref(false);
 
+// if the store hasn't loaded. We check if a user is logged in.
+if (!user.loaded) {
+    const { onResult } = await useGetLoggedUserQuery();
+
+    onResult((res) => {
+        user.logIn({username: res.data.loggedUser.username});
+        user.loaded = true;
+    })
+}
 
 
 
-const { mutate: logout, onDone, onError } = useLogoutUserMutation();
+const { mutate: logout, onDone: onUserLogout, onError } = useLogoutUserMutation();
 
-onDone((res) => {
+onUserLogout((res) => {
     if (res.data.logoutUser) {
         user.$reset();
     }
