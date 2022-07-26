@@ -53,6 +53,7 @@ export interface NexusGenFieldTypes {
     registerUser: NexusGenRootTypes['User'] | null; // User
   }
   Query: { // field return type
+    loggedUser: NexusGenRootTypes['User'] | null; // User
     user: NexusGenRootTypes['User'] | null; // User
     users: NexusGenRootTypes['User'][] | null; // [User!]
   }
@@ -69,6 +70,7 @@ export interface NexusGenFieldTypeNames {
     registerUser: 'User'
   }
   Query: { // field return type name
+    loggedUser: 'User'
     user: 'User'
     users: 'User'
   }

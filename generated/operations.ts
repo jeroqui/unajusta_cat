@@ -40,6 +40,7 @@ export type MutationRegisterUserArgs = {
 
 export type Query = {
   __typename?: 'Query';
+  loggedUser?: Maybe<User>;
   user?: Maybe<User>;
   users?: Maybe<Array<User>>;
 };
@@ -61,6 +62,11 @@ export type GetUsersQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type GetUsersQuery = { __typename?: 'Query', users?: Array<{ __typename: 'User', id?: number | null, username?: string | null }> | null };
+
+export type GetLoggedUserQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetLoggedUserQuery = { __typename?: 'Query', loggedUser?: { __typename?: 'User', id?: number | null, username?: string | null } | null };
 
 export type LoginUserMutationVariables = Exact<{
   username: Scalars['String'];
@@ -108,6 +114,27 @@ export function useGetUsersLazyQuery(options: VueApolloComposable.UseQueryOption
   return VueApolloComposable.useLazyQuery<GetUsersQuery, GetUsersQueryVariables>(GetUsersDocument, {}, options);
 }
 export type GetUsersQueryCompositionFunctionResult = VueApolloComposable.UseQueryReturn<GetUsersQuery, GetUsersQueryVariables>;
+export const GetLoggedUserDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetLoggedUser"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"loggedUser"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"username"}}]}}]}}]} as unknown as DocumentNode;
+
+/**
+ * __useGetLoggedUserQuery__
+ *
+ * To run a query within a Vue component, call `useGetLoggedUserQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetLoggedUserQuery` returns an object from Apollo Client that contains result, loading and error properties
+ * you can use to render your UI.
+ *
+ * @param options that will be passed into the query, supported options are listed on: https://v4.apollo.vuejs.org/guide-composable/query.html#options;
+ *
+ * @example
+ * const { result, loading, error } = useGetLoggedUserQuery();
+ */
+export function useGetLoggedUserQuery(options: VueApolloComposable.UseQueryOptions<GetLoggedUserQuery, GetLoggedUserQueryVariables> | VueCompositionApi.Ref<VueApolloComposable.UseQueryOptions<GetLoggedUserQuery, GetLoggedUserQueryVariables>> | ReactiveFunction<VueApolloComposable.UseQueryOptions<GetLoggedUserQuery, GetLoggedUserQueryVariables>> = {}) {
+  return VueApolloComposable.useQuery<GetLoggedUserQuery, GetLoggedUserQueryVariables>(GetLoggedUserDocument, {}, options);
+}
+export function useGetLoggedUserLazyQuery(options: VueApolloComposable.UseQueryOptions<GetLoggedUserQuery, GetLoggedUserQueryVariables> | VueCompositionApi.Ref<VueApolloComposable.UseQueryOptions<GetLoggedUserQuery, GetLoggedUserQueryVariables>> | ReactiveFunction<VueApolloComposable.UseQueryOptions<GetLoggedUserQuery, GetLoggedUserQueryVariables>> = {}) {
+  return VueApolloComposable.useLazyQuery<GetLoggedUserQuery, GetLoggedUserQueryVariables>(GetLoggedUserDocument, {}, options);
+}
+export type GetLoggedUserQueryCompositionFunctionResult = VueApolloComposable.UseQueryReturn<GetLoggedUserQuery, GetLoggedUserQueryVariables>;
 export const LoginUserDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"LoginUser"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"username"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"password"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"loginUser"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"username"},"value":{"kind":"Variable","name":{"kind":"Name","value":"username"}}},{"kind":"Argument","name":{"kind":"Name","value":"password"},"value":{"kind":"Variable","name":{"kind":"Name","value":"password"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"username"}}]}}]}}]} as unknown as DocumentNode;
 
 /**

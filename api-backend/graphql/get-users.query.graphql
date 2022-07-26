@@ -5,3 +5,10 @@ query GetUsers {
     username
   }
 }
+
+query GetLoggedUser {
+  loggedUser {
+    id
+    username
+  }
+}

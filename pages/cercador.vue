@@ -3,18 +3,7 @@
         <div class="container">
             <main class="block">
                 <h1 class="is-size-1 title">Cercador</h1>
-                <div class="is-flex is-justify-content-center">
-                    <div class="field has-addons">
-                        <p class="control">
-                            <input class="input" type="text" placeholder="Find a post">
-                        </p>
-                        <p class="control">
-                            <button class="button">
-                                Search
-                            </button>
-                        </p>
-                    </div>
-                </div>
+                <search-bar />
             </main>
 
             <div class="columns">

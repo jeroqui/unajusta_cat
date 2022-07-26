@@ -80,5 +80,12 @@
                 </div>
             </div>
         </section>
+
+
+        <section class="hero">
+            <div class="hero-body">
+                <search-bar />
+            </div>
+        </section>
     </div>
 </template>
