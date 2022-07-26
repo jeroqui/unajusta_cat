@@ -25,7 +25,7 @@ export default defineNuxtConfig({
     apollo: {
         clientConfigs: {
             default: {
-                uri: 'api/graphql',
+                uri: '/api/graphql',
                 // cache: new InMemoryCache()
             },
         },
