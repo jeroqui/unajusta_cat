@@ -2,7 +2,7 @@
     <nav class="navbar" role="navigation" aria-label="main navigation">
         <div class="navbar-brand">
             <NuxtLink class="navbar-item" to="/">
-                <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28">
+                <img src="/img/unajusta_logo.png">
             </NuxtLink>
 
             <a role="button" :class="menu? 'navbar-burger is-active' : 'navbar-burger'" aria-label="menu" aria-expanded="false"
@@ -15,9 +15,9 @@
 
         <div id="main-navbar" :class="menu? 'navbar-menu is-active' : 'navbar-menu'">
             <div class="navbar-start">
-                <a class="navbar-item">
+                <NuxtLink to="/" class="navbar-item">
                     Home
-                </a>
+                </NuxtLink>
 
                 <a class="navbar-item">
                     Documentation
@@ -59,19 +59,23 @@
                 </div>
             </div>
             <div v-else class="navbar-end">
+                <div class="navbar-item">
+                    <div class="buttons">
+                        <NuxtLink to="organitza" class="button is-light">
+                            Crea una justa
+                        </NuxtLink>
+                    </div>
+                </div>
                 <div class="navbar-item has-dropdown is-hoverable">
                     <a class="navbar-link">
                         <strong class="navbar-username">{{user.loggedUser.username}}</strong>
-                        <figure class="image is-48x48 ">
-                            <img v-if="user.loggedUser.profilePic" src="" alt="" class="is-rounded">
-                            <div v-else class="default-profile has-background-primary"></div>
-                        </figure>
+                        <user-figure />
                     </a>
 
                     <div class="navbar-dropdown">
-                        <a class="navbar-item">
+                        <NuxtLink to="profile" class="navbar-item">
                             Profile
-                        </a>
+                        </NuxtLink>
 
                         <hr class="navbar-divider">
                         <a @click="logout" class="navbar-item">
@@ -89,7 +93,7 @@
 import { useUserStore } from '~/store/user'
 import { ref } from 'vue'
 
-import { useLogoutUserMutation } from '~~/composables/api';
+import { useLogoutUserMutation } from '@/generated/operations';
 
 const user = useUserStore();
 
