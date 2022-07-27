@@ -7,14 +7,16 @@
             <div class="columns">
                 <div class="column is-three-quarters">
                     <div class="field">
-                        <label class="label">Nom</label>
+                        <label class="label">Títol</label>
                         <div class="control">
-                            <input class="input" type="text" placeholder="Nom">
+                            <input class="input" :class="errors.title.any ? 'is-danger' : ''" type="text" placeholder="Títol" v-model="title" @change="validate('title')">
+                            <p v-if="errors.title.any" class="help is-danger">{{errors.title.message}}</p>
                         </div>
                     </div>
                     <div class="field">
                         <label class="label">Descripció</label>
-                        <textarea class="textarea" placeholder="e.g. Hello world"></textarea>
+                        <textarea class="textarea" :class="(description.length < 5) ? 'is-danger' : ''" placeholder="e.g. Hello world" v-model="description"></textarea>
+                        <p v-if="description.length < 5" class="help is-danger">Should be longer</p>
                     </div>
 
                     <div class="columns mt-5">
@@ -36,33 +38,31 @@
                             </div>
                             <template v-if="!fixedGroups">
                                 <div class="block">
-                                    <input class="input" type="number" placeholder="Minim">
+                                    Min: <input class="input" type="number" placeholder="Minim" v-model="minGroups">
                                 </div>
-                                <input class="input" type="number" placeholder="Màxim">
+                                    Max: <input class="input" type="number" placeholder="Màxim" v-model="maxGroups">
+                                
+
                             </template>
                             <div class="block" v-else>
-                                <input class="input" type="number" placeholder="Nombre de participants">
+                                <input class="input" type="number" placeholder="Nombre de participants" v-model="minGroups">
                             </div>
                         </div>
                     </div>
 
                     <div class="block">
-                        <div class="control has-icons-left">
-                            <div class="select">
-                                <select>
-                                    <option selected>Esport / Disciplina</option>
-                                    <option>Select dropdown</option>
-                                    <option>With options</option>
+                        <div class="control">
+                            <div class="select" :class="loading ? 'is-lading' : ''">
+                                <select v-model="esport">
+                                    <option value="" selected disabled>Esport / Disciplina</option>
+                                    <option v-if="!loading && !error" v-for="item in result.esports" :value="item.id" :key="item.id">{{item.nom}}</option>
                                 </select>
                             </div>
-                            <div class="icon is-small is-left">
-                                <i class="fas fa-globe"></i>
-                            </div>
                         </div>
                     </div>
 
                     <div class="block">
-                        <progress class="progress is-info" value="45" max="100">45%</progress>
+                        <progress class="progress is-info" :value="3 - errors.amount" max="3"></progress>
                     </div>
 
 
@@ -78,10 +78,61 @@
 
 <script setup>
 import { ref } from 'vue'
+import {useGetAllSportsQuery} from '@/generated/operations'
 
 
+const title = ref("");
+const description = ref("");
 
-const singleGroups = ref(false);
+
+const singleGroups = ref(true);
 const fixedGroups = ref(false);
+const minGroups = ref(1);
+const maxGroups = ref(2);
+
+const esport = ref("");
+
+
+const errors = reactive({
+    title: {},
+    description: {},
+    esports: {},
+    amount: 3
+});
+
+
+const { result, loading, error } = await useGetAllSportsQuery();
+
+
+
+function validate(item) {
+    switch (item) {
+        case 'title':
+            if (true) {
+                errors.title.any = true;
+            }
+            break;
+    
+        default:
+            break;
+    }
+}
+
+
+watch(maxGroups, (newVal) => {
+    if (newVal < minGroups.value && newVal > 0) {
+        minGroups.value = newVal;
+    }else if (newVal < 1) {
+        maxGroups.value = 1;
+    }
+})
+
+watch(minGroups, (newVal) => {
+    if (newVal > maxGroups.value) {
+        maxGroups.value = newVal;
+    }else if (newVal < 1) {
+        minGroups.value = 1;
+    }
+})
 
 </script>

@@ -12,3 +12,13 @@ export const Torneig = objectType({
         t.int('grupsMaxPersones')
     },
 })
+
+
+
+export const Esport = objectType({
+    name: 'Esport',
+    definition(t) {
+        t.int('id')
+        t.string('nom')
+    },
+})

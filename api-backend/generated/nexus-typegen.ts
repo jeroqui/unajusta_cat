@@ -28,8 +28,27 @@ export interface NexusGenScalars {
 }
 
 export interface NexusGenObjects {
+  Esport: { // root type
+    id?: number | null; // Int
+    nom?: string | null; // String
+  }
   Mutation: {};
+  Persona: { // root type
+    active?: boolean | null; // Boolean
+    cognoms?: string | null; // String
+    email?: string | null; // String
+    id?: string | null; // String
+    nom?: string | null; // String
+    persist?: boolean | null; // Boolean
+  }
   Query: {};
+  Torneig: { // root type
+    descripcio?: string | null; // String
+    grupsMaxPersones?: number | null; // Int
+    grupsMinPersones?: number | null; // Int
+    id?: string | null; // String
+    nom?: string | null; // String
+  }
   User: { // root type
     id?: number | null; // Int
     username?: string | null; // String
@@ -47,35 +66,79 @@ export type NexusGenRootTypes = NexusGenObjects
 export type NexusGenAllTypes = NexusGenRootTypes & NexusGenScalars
 
 export interface NexusGenFieldTypes {
+  Esport: { // field return type
+    id: number | null; // Int
+    nom: string | null; // String
+  }
   Mutation: { // field return type
     loginUser: NexusGenRootTypes['User'] | null; // User
     logoutUser: boolean | null; // Boolean
     registerUser: NexusGenRootTypes['User'] | null; // User
   }
+  Persona: { // field return type
+    active: boolean | null; // Boolean
+    cognoms: string | null; // String
+    email: string | null; // String
+    id: string | null; // String
+    nom: string | null; // String
+    persist: boolean | null; // Boolean
+  }
   Query: { // field return type
+    esports: NexusGenRootTypes['Esport'][] | null; // [Esport!]
     loggedUser: NexusGenRootTypes['User'] | null; // User
+    persona: NexusGenRootTypes['Persona'] | null; // Persona
     user: NexusGenRootTypes['User'] | null; // User
     users: NexusGenRootTypes['User'][] | null; // [User!]
   }
+  Torneig: { // field return type
+    descripcio: string | null; // String
+    grupsMaxPersones: number | null; // Int
+    grupsMinPersones: number | null; // Int
+    id: string | null; // String
+    nom: string | null; // String
+  }
   User: { // field return type
     id: number | null; // Int
+    persona: NexusGenRootTypes['Persona'] | null; // Persona
     username: string | null; // String
   }
 }
 
 export interface NexusGenFieldTypeNames {
+  Esport: { // field return type name
+    id: 'Int'
+    nom: 'String'
+  }
   Mutation: { // field return type name
     loginUser: 'User'
     logoutUser: 'Boolean'
     registerUser: 'User'
   }
+  Persona: { // field return type name
+    active: 'Boolean'
+    cognoms: 'String'
+    email: 'String'
+    id: 'String'
+    nom: 'String'
+    persist: 'Boolean'
+  }
   Query: { // field return type name
+    esports: 'Esport'
     loggedUser: 'User'
+    persona: 'Persona'
     user: 'User'
     users: 'User'
   }
+  Torneig: { // field return type name
+    descripcio: 'String'
+    grupsMaxPersones: 'Int'
+    grupsMinPersones: 'Int'
+    id: 'String'
+    nom: 'String'
+  }
   User: { // field return type name
     id: 'Int'
+    persona: 'Persona'
     username: 'String'
   }
 }
@@ -95,8 +158,13 @@ export interface NexusGenArgTypes {
     }
   }
   Query: {
+    persona: { // args
+      email?: string | null; // String
+      id?: string | null; // String
+    }
     user: { // args
-      userId: number; // Int!
+      userId?: number | null; // Int
+      username?: string | null; // String
     }
   }
 }

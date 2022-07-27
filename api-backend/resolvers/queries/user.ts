@@ -1,15 +1,18 @@
-import { intArg, list, nonNull, queryField } from "nexus";
-import { User } from "../models/user";
+import { intArg, list, nonNull, queryField, stringArg } from "nexus";
+import { Persona, User } from "../models/user";
 
 
 
 export const user = queryField('user', {
     type: User,
     args: {
-        userId: nonNull(intArg())
+        userId: intArg({default: undefined}),
+        username: stringArg({default: undefined})
     },
     resolve: async (root, args, ctx) => {
-        return ctx.prisma.user.findUnique({where: {id: args.userId}});
+        return ctx.prisma.user.findUniqueOrThrow({where: {id: args.userId, username: args.username},
+            // include: {persona: true}
+        });
     }
 });
 
@@ -27,3 +30,15 @@ export const users = queryField('users', {
         return ctx.prisma.user.findMany();
     }
 });
+
+
+export const persona = queryField('persona', {
+    type: Persona,
+    args: {
+        id: stringArg({default: undefined}),
+        email: stringArg({default: undefined})
+    },
+    resolve: async (root, args, ctx) => {
+        return ctx.prisma.persona.findUniqueOrThrow({where: {id: args.id, email: args.email}})
+    }
+})
