@@ -1,0 +1,7 @@
+
+query GetAllSports {
+  esports {
+    id
+    nom
+  }
+}

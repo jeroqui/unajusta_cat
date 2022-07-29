@@ -12,6 +12,12 @@ export type Scalars = {
   Float: number;
 };
 
+export type Esport = {
+  __typename?: 'Esport';
+  id?: Maybe<Scalars['Int']>;
+  nom?: Maybe<Scalars['String']>;
+};
+
 export type Mutation = {
   __typename?: 'Mutation';
   loginUser?: Maybe<User>;
@@ -34,22 +40,52 @@ export type MutationRegisterUserArgs = {
   username: Scalars['String'];
 };
 
+export type Persona = {
+  __typename?: 'Persona';
+  active?: Maybe<Scalars['Boolean']>;
+  cognoms?: Maybe<Scalars['String']>;
+  email?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['String']>;
+  nom?: Maybe<Scalars['String']>;
+  persist?: Maybe<Scalars['Boolean']>;
+};
+
 export type Query = {
   __typename?: 'Query';
+  esports?: Maybe<Array<Esport>>;
   loggedUser?: Maybe<User>;
+  persona?: Maybe<Persona>;
   user?: Maybe<User>;
   users?: Maybe<Array<User>>;
 };
 
 
+export type QueryPersonaArgs = {
+  email?: InputMaybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['String']>;
+};
+
+
 export type QueryUserArgs = {
-  userId: Scalars['Int'];
+  userId?: InputMaybe<Scalars['Int']>;
+  username?: InputMaybe<Scalars['String']>;
+};
+
+export type Torneig = {
+  __typename?: 'Torneig';
+  descripcio?: Maybe<Scalars['String']>;
+  grupsMaxPersones?: Maybe<Scalars['Int']>;
+  grupsMinPersones?: Maybe<Scalars['Int']>;
+  /** Id del torneig */
+  id?: Maybe<Scalars['String']>;
+  nom?: Maybe<Scalars['String']>;
 };
 
 export type User = {
   __typename?: 'User';
   /** ID of the user */
   id?: Maybe<Scalars['Int']>;
+  persona?: Maybe<Persona>;
   /** Username of the user */
   username?: Maybe<Scalars['String']>;
 };

@@ -12,3 +12,17 @@ query GetLoggedUser {
     username
   }
 }
+
+query GetProfileInfo($username: String!) {
+  user(username: $username) {
+    persona {
+      id
+      email
+      nom
+      cognoms
+      active
+    }
+    id
+    username
+  }
+}

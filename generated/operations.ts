@@ -16,6 +16,12 @@ export type Scalars = {
   Float: number;
 };
 
+export type Esport = {
+  __typename?: 'Esport';
+  id?: Maybe<Scalars['Int']>;
+  nom?: Maybe<Scalars['String']>;
+};
+
 export type Mutation = {
   __typename?: 'Mutation';
   loginUser?: Maybe<User>;
@@ -38,25 +44,60 @@ export type MutationRegisterUserArgs = {
   username: Scalars['String'];
 };
 
+export type Persona = {
+  __typename?: 'Persona';
+  active?: Maybe<Scalars['Boolean']>;
+  cognoms?: Maybe<Scalars['String']>;
+  email?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['String']>;
+  nom?: Maybe<Scalars['String']>;
+  persist?: Maybe<Scalars['Boolean']>;
+};
+
 export type Query = {
   __typename?: 'Query';
+  esports?: Maybe<Array<Esport>>;
   loggedUser?: Maybe<User>;
+  persona?: Maybe<Persona>;
   user?: Maybe<User>;
   users?: Maybe<Array<User>>;
 };
 
 
+export type QueryPersonaArgs = {
+  email?: InputMaybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['String']>;
+};
+
+
 export type QueryUserArgs = {
-  userId: Scalars['Int'];
+  userId?: InputMaybe<Scalars['Int']>;
+  username?: InputMaybe<Scalars['String']>;
+};
+
+export type Torneig = {
+  __typename?: 'Torneig';
+  descripcio?: Maybe<Scalars['String']>;
+  grupsMaxPersones?: Maybe<Scalars['Int']>;
+  grupsMinPersones?: Maybe<Scalars['Int']>;
+  /** Id del torneig */
+  id?: Maybe<Scalars['String']>;
+  nom?: Maybe<Scalars['String']>;
 };
 
 export type User = {
   __typename?: 'User';
   /** ID of the user */
   id?: Maybe<Scalars['Int']>;
+  persona?: Maybe<Persona>;
   /** Username of the user */
   username?: Maybe<Scalars['String']>;
 };
+
+export type GetAllSportsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetAllSportsQuery = { __typename?: 'Query', esports?: Array<{ __typename?: 'Esport', id?: number | null, nom?: string | null }> | null };
 
 export type LoginUserMutationVariables = Exact<{
   username: Scalars['String'];
@@ -92,7 +133,35 @@ export type GetLoggedUserQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type GetLoggedUserQuery = { __typename?: 'Query', loggedUser?: { __typename?: 'User', id?: number | null, username?: string | null } | null };
 
+export type GetProfileInfoQueryVariables = Exact<{
+  username: Scalars['String'];
+}>;
 
+
+export type GetProfileInfoQuery = { __typename?: 'Query', user?: { __typename?: 'User', id?: number | null, username?: string | null, persona?: { __typename?: 'Persona', id?: string | null, email?: string | null, nom?: string | null, cognoms?: string | null, active?: boolean | null } | null } | null };
+
+
+export const GetAllSportsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetAllSports"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"esports"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"nom"}}]}}]}}]} as unknown as DocumentNode;
+
+/**
+ * __useGetAllSportsQuery__
+ *
+ * To run a query within a Vue component, call `useGetAllSportsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetAllSportsQuery` returns an object from Apollo Client that contains result, loading and error properties
+ * you can use to render your UI.
+ *
+ * @param options that will be passed into the query, supported options are listed on: https://v4.apollo.vuejs.org/guide-composable/query.html#options;
+ *
+ * @example
+ * const { result, loading, error } = useGetAllSportsQuery();
+ */
+export function useGetAllSportsQuery(options: VueApolloComposable.UseQueryOptions<GetAllSportsQuery, GetAllSportsQueryVariables> | VueCompositionApi.Ref<VueApolloComposable.UseQueryOptions<GetAllSportsQuery, GetAllSportsQueryVariables>> | ReactiveFunction<VueApolloComposable.UseQueryOptions<GetAllSportsQuery, GetAllSportsQueryVariables>> = {}) {
+  return VueApolloComposable.useQuery<GetAllSportsQuery, GetAllSportsQueryVariables>(GetAllSportsDocument, {}, options);
+}
+export function useGetAllSportsLazyQuery(options: VueApolloComposable.UseQueryOptions<GetAllSportsQuery, GetAllSportsQueryVariables> | VueCompositionApi.Ref<VueApolloComposable.UseQueryOptions<GetAllSportsQuery, GetAllSportsQueryVariables>> | ReactiveFunction<VueApolloComposable.UseQueryOptions<GetAllSportsQuery, GetAllSportsQueryVariables>> = {}) {
+  return VueApolloComposable.useLazyQuery<GetAllSportsQuery, GetAllSportsQueryVariables>(GetAllSportsDocument, {}, options);
+}
+export type GetAllSportsQueryCompositionFunctionResult = VueApolloComposable.UseQueryReturn<GetAllSportsQuery, GetAllSportsQueryVariables>;
 export const LoginUserDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"LoginUser"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"username"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"password"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"loginUser"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"username"},"value":{"kind":"Variable","name":{"kind":"Name","value":"username"}}},{"kind":"Argument","name":{"kind":"Name","value":"password"},"value":{"kind":"Variable","name":{"kind":"Name","value":"password"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"username"}}]}}]}}]} as unknown as DocumentNode;
 
 /**
@@ -205,3 +274,27 @@ export function useGetLoggedUserLazyQuery(options: VueApolloComposable.UseQueryO
   return VueApolloComposable.useLazyQuery<GetLoggedUserQuery, GetLoggedUserQueryVariables>(GetLoggedUserDocument, {}, options);
 }
 export type GetLoggedUserQueryCompositionFunctionResult = VueApolloComposable.UseQueryReturn<GetLoggedUserQuery, GetLoggedUserQueryVariables>;
+export const GetProfileInfoDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetProfileInfo"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"username"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"user"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"username"},"value":{"kind":"Variable","name":{"kind":"Name","value":"username"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"persona"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"nom"}},{"kind":"Field","name":{"kind":"Name","value":"cognoms"}},{"kind":"Field","name":{"kind":"Name","value":"active"}}]}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"username"}}]}}]}}]} as unknown as DocumentNode;
+
+/**
+ * __useGetProfileInfoQuery__
+ *
+ * To run a query within a Vue component, call `useGetProfileInfoQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetProfileInfoQuery` returns an object from Apollo Client that contains result, loading and error properties
+ * you can use to render your UI.
+ *
+ * @param variables that will be passed into the query
+ * @param options that will be passed into the query, supported options are listed on: https://v4.apollo.vuejs.org/guide-composable/query.html#options;
+ *
+ * @example
+ * const { result, loading, error } = useGetProfileInfoQuery({
+ *   username: // value for 'username'
+ * });
+ */
+export function useGetProfileInfoQuery(variables: GetProfileInfoQueryVariables | VueCompositionApi.Ref<GetProfileInfoQueryVariables> | ReactiveFunction<GetProfileInfoQueryVariables>, options: VueApolloComposable.UseQueryOptions<GetProfileInfoQuery, GetProfileInfoQueryVariables> | VueCompositionApi.Ref<VueApolloComposable.UseQueryOptions<GetProfileInfoQuery, GetProfileInfoQueryVariables>> | ReactiveFunction<VueApolloComposable.UseQueryOptions<GetProfileInfoQuery, GetProfileInfoQueryVariables>> = {}) {
+  return VueApolloComposable.useQuery<GetProfileInfoQuery, GetProfileInfoQueryVariables>(GetProfileInfoDocument, variables, options);
+}
+export function useGetProfileInfoLazyQuery(variables: GetProfileInfoQueryVariables | VueCompositionApi.Ref<GetProfileInfoQueryVariables> | ReactiveFunction<GetProfileInfoQueryVariables>, options: VueApolloComposable.UseQueryOptions<GetProfileInfoQuery, GetProfileInfoQueryVariables> | VueCompositionApi.Ref<VueApolloComposable.UseQueryOptions<GetProfileInfoQuery, GetProfileInfoQueryVariables>> | ReactiveFunction<VueApolloComposable.UseQueryOptions<GetProfileInfoQuery, GetProfileInfoQueryVariables>> = {}) {
+  return VueApolloComposable.useLazyQuery<GetProfileInfoQuery, GetProfileInfoQueryVariables>(GetProfileInfoDocument, variables, options);
+}
+export type GetProfileInfoQueryCompositionFunctionResult = VueApolloComposable.UseQueryReturn<GetProfileInfoQuery, GetProfileInfoQueryVariables>;

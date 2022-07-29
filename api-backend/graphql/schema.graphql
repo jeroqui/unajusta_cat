@@ -2,21 +2,48 @@
 ### Do not make changes to this file directly
 
 
+type Esport {
+  id: Int
+  nom: String
+}
+
 type Mutation {
   loginUser(password: String!, username: String!): User
   logoutUser: Boolean
   registerUser(cognoms: String, email: String!, nom: String!, password: String!, username: String!): User
 }
 
+type Persona {
+  active: Boolean
+  cognoms: String
+  email: String
+  id: String
+  nom: String
+  persist: Boolean
+}
+
 type Query {
+  esports: [Esport!]
   loggedUser: User
-  user(userId: Int!): User
+  persona(email: String, id: String): Persona
+  user(userId: Int, username: String): User
   users: [User!]
+}
+
+type Torneig {
+  descripcio: String
+  grupsMaxPersones: Int
+  grupsMinPersones: Int
+
+  """Id del torneig"""
+  id: String
+  nom: String
 }
 
 type User {
   """ID of the user"""
   id: Int
+  persona: Persona
 
   """Username of the user"""
   username: String
